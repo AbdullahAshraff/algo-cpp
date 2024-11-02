@@ -26,7 +26,7 @@
 */
 
 #include <iostream>
-#include <vector>
+#include <chrono>
 #define MAX 4
 
 using namespace std;
@@ -44,7 +44,7 @@ void add_matrices(int (&A)[MAX][MAX], int (&B)[MAX][MAX],
                   int (&result)[MAX][MAX], int n) {
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < n; j++) {
-      result[i][j] += A[i][j] + B[i][j];
+      result[i][j] = A[i][j] + B[i][j];
     }
   }
 }
@@ -127,7 +127,6 @@ void recursive_multiply_matrices(int (&matrix1)[MAX][MAX],
     }
   }
 }
-
 int main() {
   int matrix1[MAX][MAX] = {
       {1, 2, 3, 5}, {4, 5, 6, 7}, {7, 8, 9, 8}, {4, 3, 2, 1}};
@@ -137,8 +136,17 @@ int main() {
 
   int result[MAX][MAX] = {0};
 
+  auto start = chrono::high_resolution_clock::now();
+
   recursive_multiply_matrices(matrix1, matrix2, result, MAX);
 
+  auto end = chrono::high_resolution_clock::now();
+  auto duration_recursive =
+      chrono::duration_cast<chrono::microseconds>(end - start).count();
+
   display_result(result);
+
+  cout << endl << "Time taken: " << duration_recursive << endl;
+
   return 0;
 }

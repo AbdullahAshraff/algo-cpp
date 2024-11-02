@@ -22,7 +22,7 @@
 */
 
 #include <iostream>
-#include <vector>
+#include <chrono>
 #define MAT1_ROWS 4
 #define MATMIX 4
 #define MAT2_COLS 4
@@ -53,16 +53,23 @@ void multiply_matrices(int (&matrix1)[MAT1_ROWS][MATMIX],
 }
 
 int main() {
-  int matrix1[4][4] = {
-      {1, 2, 3, 5}, {4, 5, 6, 7}, {7, 8, 9, 8}, {4, 3, 2, 1}};
+  int matrix1[4][4] = {{1, 2, 3, 5}, {4, 5, 6, 7}, {7, 8, 9, 8}, {4, 3, 2, 1}};
 
   int matrix2[4][4] = {
       {7, 8, 9, 1}, {11, 12, 13, 2}, {15, 16, 17, 3}, {8, 7, 6, 5}};
 
   int result[RES_ROWS][RES_COLS] = {0};
 
+  auto start = chrono::high_resolution_clock::now();
   multiply_matrices(matrix1, matrix2, result);
 
+  auto end = chrono::high_resolution_clock::now();
+  auto duration_recursive =
+      chrono::duration_cast<chrono::microseconds>(end - start).count();
+
   display_result(result);
+
+  cout << endl << "Time taken: " << duration_recursive << endl;
+
   return 0;
 }
