@@ -6,19 +6,16 @@
  */
 
 /*
-  matrix1 is
-
+  ------ matrix1 is
   1 2 3
   4 5 6
 
-  matrix2 is
-
+  ------ matrix2 is
   7  8  9  10
   11 12 13 14
   15 16 17 18
 
-
-  result is
+  ------ result is
   74 80 86 92
   173 188 203 218
 
@@ -34,12 +31,24 @@
 
 using namespace std;
 
-void displayResult(int matrix[RES_ROWS][RES_COLS]) {
+void display_result(int matrix[RES_ROWS][RES_COLS]) {
   for (int irow = 0; irow < RES_ROWS; irow++) {
     for (int icol = 0; icol < RES_COLS; icol++) {
       cout << matrix[irow][icol] << " ";
     }
     cout << endl;
+  }
+}
+
+void multiply_matrices(int (&matrix1)[MAT1_ROWS][MATMIX],
+                       int (&matrix2)[MATMIX][MAT2_COLS],
+                       int (&result)[RES_ROWS][RES_COLS]) {
+  for (int resRow = 0; resRow < RES_ROWS; resRow++) {
+    for (int resCol = 0; resCol < RES_COLS; resCol++) {
+      for (int x = 0; x < MATMIX; x++) {
+        result[resRow][resCol] += matrix1[resRow][x] * matrix2[x][resCol];
+      }
+    }
   }
 }
 
@@ -51,14 +60,8 @@ int main() {
 
   int result[RES_ROWS][RES_COLS] = {0};
 
-  for (int resRow = 0; resRow < RES_ROWS; resRow++) {
-    for (int resCol = 0; resCol < RES_COLS; resCol++) {
-      for (int x = 0; x < MATMIX; x++) {
-        result[resRow][resCol] += matrix1[resRow][x] * matrix2[x][resCol];
-      }
-    }
-  }
+  multiply_matrices(matrix1, matrix2, result);
 
-  displayResult(result);
+  display_result(result);
   return 0;
 }
