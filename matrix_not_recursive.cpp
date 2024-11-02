@@ -23,8 +23,8 @@
 
 #include <iostream>
 #include <vector>
-#define MAT1_ROWS 2
-#define MATMIX 3
+#define MAT1_ROWS 4
+#define MATMIX 4
 #define MAT2_COLS 4
 #define RES_ROWS MAT1_ROWS
 #define RES_COLS MAT2_COLS
@@ -53,10 +53,11 @@ void multiply_matrices(int (&matrix1)[MAT1_ROWS][MATMIX],
 }
 
 int main() {
-  int matrix1[MAT1_ROWS][MATMIX] = {{1, 2, 3}, {4, 5, 6}};
+  int matrix1[4][4] = {
+      {1, 2, 3, 5}, {4, 5, 6, 7}, {7, 8, 9, 8}, {4, 3, 2, 1}};
 
-  int matrix2[MATMIX][MAT2_COLS] = {
-      {7, 8, 9, 10}, {11, 12, 13, 14}, {15, 16, 17, 18}};
+  int matrix2[4][4] = {
+      {7, 8, 9, 1}, {11, 12, 13, 2}, {15, 16, 17, 3}, {8, 7, 6, 5}};
 
   int result[RES_ROWS][RES_COLS] = {0};
 
