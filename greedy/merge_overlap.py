@@ -12,14 +12,13 @@ def mergeOverlap(intervals: list):
         last_added = res[-1]
         current = intervals[i]
 
-        # If current interval overlaps with the last merged interval, merge them 
+        # If current interval overlaps with the last merged interval, merge them
         if current[0] <= last_added[1]:
             last_added[1] = max(last_added[1], current[1])
         else:
             res.append(current)
 
     return res
-
 
 
 if __name__ == "__main__":
