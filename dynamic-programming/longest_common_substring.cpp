@@ -67,7 +67,7 @@ int dynamic_lcs(string &s1, string &s2) {
   int n1 = s1.length();
   int n2 = s2.length();
   int res = lcs(s1, s2, n1, n2, ans, dir);
-  print_arr(dir);
+  // print_arr(dir);
   return res;
 }
 
